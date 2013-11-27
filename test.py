@@ -51,5 +51,19 @@ class TestCreationOfPolynomFromNullFunction(unittest.TestCase):
         self.assertEqual(self.polynom1.calculate_at(3), 0)
 
 
+class TestAddingTwoPolynoms(unittest.TestCase):
+
+    def setUp(self):
+        self.polynom1 = Polynom([0, 1])  # x
+        self.polynom2 = Polynom([2])     # 2
+        self.polynom3 = Polynom([-2, 0, 1])  # x² - 2
+        self.polynom4 = Polynom([-6, 11, -6, 1])
+
+    def test_adding(self):
+        summedPolynom = self.polynom1 + self.polynom2
+        referncePolynom = Polynom([2, 1])
+        self.assertEqual(summedPolynom.__repr__(), referncePolynom.__repr__())
+
+
 if __name__ == "__main__":
     unittest.main()

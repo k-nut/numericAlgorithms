@@ -21,6 +21,19 @@ class Polynom:
             sol += coefficient * position ** index
         return sol
 
+    def __add__(self, summand):
+        own_grad = len(self.coefficients)
+        summand_grad = len(summand.coefficients)
+        if own_grad > summand_grad:
+            newCoefficients = self.coefficients
+            for i in range(0, summand_grad):
+                newCoefficients[i] += summand.coefficients[i]
+        else:
+            newCoefficients = summand.coefficients
+            for i in range(0, own_grad):
+                newCoefficients[i] += self.coefficients[i]
+        return Polynom(newCoefficients)
+
 
 def createPolynomFromNull(nullstellen):
     grad = len(nullstellen) + 1
