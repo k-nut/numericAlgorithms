@@ -39,9 +39,11 @@ class TestCreationOfPolynomFromNullFunction(unittest.TestCase):
 
     def setUp(self):
         self.polynom1 = createPolynomFromNull([1, 2, 3])
+        self.polynom2 = createPolynomFromNull([1])
 
     def test_representation(self):
         self.assertEqual(self.polynom1.__repr__(), "-6x^0 + 11x^1 + -6x^2 + 1x^3")
+        self.assertEqual(self.polynom2.__repr__(), "-1x^0 + 1x^1")
 
     def test_calculating_value(self):
         self.assertEqual(self.polynom1.calculate_at(1), 0)
