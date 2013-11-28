@@ -12,7 +12,7 @@ class Polynom:
     def __repr__(self):
         rep = []
         for index, coefficient in enumerate(self.coefficients):
-            rep.append("%ix^%i" % (coefficient, index))
+            rep.append("%fx^%f" % (coefficient, index))
         return ' + '.join(rep)
 
     def calculate_at(self, position):
@@ -34,6 +34,10 @@ class Polynom:
                 newCoefficients[i] += self.coefficients[i]
         return Polynom(newCoefficients)
 
+    def __mul__(self, number):
+        coefficients = [number * float(coefficient) for coefficient in self.coefficients]
+        return Polynom(coefficients)
+
 
 def createPolynomFromNull(nullstellen):
     grad = len(nullstellen) + 1
@@ -42,12 +46,55 @@ def createPolynomFromNull(nullstellen):
         comb = combinations(nullstellen, i)
         for parts in comb:
             coefficients[i] += product(parts)
-        coefficients[i] *= (-1) ** (grad - i)
+
+    multiplier = 1
+    for i in range(0, grad):
+        coefficients[i] *= multiplier
+        multiplier *= -1
+
     coefficients.reverse()
+
     for nullstelle in nullstellen:
         assert Polynom(coefficients).calculate_at(nullstelle) == 0
 
     return Polynom(coefficients)
+
+
+def newton(xValues, yValues):
+    allValues = []
+    allValues.append(xValues)
+    allValues.append(yValues)
+
+    while len(allValues[-1]) > 1:
+        flastValues = allValues[-1]
+        slastValues = allValues[-2]
+
+        newValues = [0 for x in range(0, len(flastValues) -1)]
+        for x in range(len(flastValues) - 1, 0, -1):
+            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (slastValues[x] - slastValues[x - 1])
+        allValues.append(newValues)
+
+    finalPolynomCoefficients = []  # c0, c1, c2 etc
+    for l in allValues[1:]:
+        finalPolynomCoefficients.append(l[0])
+
+    polynoms = []  # n0, n1, n2 etc
+    polynoms.append(Polynom([1]))   # n0 is allways 1
+    for i in range(1, len(xValues)):
+        upTo = xValues[:i]
+        polynoms.append(createPolynomFromNull(upTo))
+
+    for i in range(0, len(polynoms)):
+        polynoms[i] = polynoms[i] * finalPolynomCoefficients[i]
+
+    finalPolynom = polynoms[0]
+    for i in range(1, len(polynoms)):
+        finalPolynom = finalPolynom + polynoms[i]
+
+    for i in range(0, len(xValues)):
+        assert yValues[i] == finalPolynom.calculate_at(xValues[i])
+
+    return finalPolynom
 
 
 def product(collection):
@@ -55,3 +102,8 @@ def product(collection):
     for element in collection:
         product *= element
     return product
+
+if __name__ == "__main__":
+    pol = newton([1, 3, 5], [3, 7, 14])
+    print(pol)
+    print(pol.coefficients)
