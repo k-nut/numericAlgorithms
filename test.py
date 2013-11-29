@@ -77,15 +77,15 @@ class TestMultiplyingPolynomsWithNumber(unittest.TestCase):
 
     def test_adding(self):
         multipliedPolynom1 = self.polynom1 * 3
-        referncePolynom1 = Polynom([0, 3])
+        referncePolynom1 = Polynom([0.0, 3.0])
         self.assertEqual(multipliedPolynom1.__repr__(), referncePolynom1.__repr__())
 
         multipliedPolynom2 = self.polynom3 * 5
-        referncePolynom2 = Polynom([-10, 0, 5])
+        referncePolynom2 = Polynom([-10.0, 0.0, 5.0])
         self.assertEqual(multipliedPolynom2.__repr__(), referncePolynom2.__repr__())
 
         multipliedPolynom3 = self.polynom1 * 0.5
-        referncePolynom3 = Polynom([0, 0.5])
+        referncePolynom3 = Polynom([0.0, 0.5])
         self.assertEqual(multipliedPolynom3.coefficients, referncePolynom3.coefficients)
 
 

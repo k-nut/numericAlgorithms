@@ -12,7 +12,7 @@ class Polynom:
     def __repr__(self):
         rep = []
         for index, coefficient in enumerate(self.coefficients):
-            rep.append("%fx^%f" % (coefficient, index))
+            rep.append("%sx^%i" % (str(coefficient), index))
         return ' + '.join(rep)
 
     def calculate_at(self, position):
