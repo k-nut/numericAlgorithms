@@ -64,19 +64,24 @@ def newton(xValues, yValues):
     allValues = []
     allValues.append(xValues)
     allValues.append(yValues)
+    firstValues = allValues[0]
 
     while len(allValues[-1]) > 1:
         flastValues = allValues[-1]
-        slastValues = allValues[-2]
 
         newValues = [0 for x in range(0, len(flastValues) -1)]
+        c = len(newValues) - 1
+        s = len(firstValues) -1
         for x in range(len(flastValues) - 1, 0, -1):
-            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (slastValues[x] - slastValues[x - 1])
+            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (firstValues[s] - firstValues[c])
+            c -= 1
+            s -= 1
         allValues.append(newValues)
 
     finalPolynomCoefficients = []  # c0, c1, c2 etc
     for l in allValues[1:]:
         finalPolynomCoefficients.append(l[0])
+    print finalPolynomCoefficients
 
     polynoms = []  # n0, n1, n2 etc
     polynoms.append(Polynom([1]))   # n0 is allways 1
@@ -106,4 +111,6 @@ def product(collection):
 if __name__ == "__main__":
     pol = newton([1, 3, 5], [3, 7, 14])
     print(pol)
-    print(pol.coefficients)
+
+    pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
+    print(pol2)

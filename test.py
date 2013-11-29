@@ -4,7 +4,7 @@
 
 import unittest
 import random
-from sol import Polynom, createPolynomFromNull
+from sol import Polynom, createPolynomFromNull, newton
 
 
 class TestPolynomFunction(unittest.TestCase):
@@ -87,6 +87,12 @@ class TestMultiplyingPolynomsWithNumber(unittest.TestCase):
         multipliedPolynom3 = self.polynom1 * 0.5
         referncePolynom3 = Polynom([0.0, 0.5])
         self.assertEqual(multipliedPolynom3.coefficients, referncePolynom3.coefficients)
+
+
+class TestNewton(unittest.TestCase):
+    def setUp(self):
+        self.polynom1 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
+        #This is already checked by the assertion in the function
 
 
 if __name__ == "__main__":
