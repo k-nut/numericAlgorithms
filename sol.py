@@ -25,11 +25,11 @@ class Polynom:
         own_grad = len(self.coefficients)
         summand_grad = len(summand.coefficients)
         if own_grad > summand_grad:
-            newCoefficients = self.coefficients
+            newCoefficients = list(self.coefficients)
             for i in range(0, summand_grad):
                 newCoefficients[i] += summand.coefficients[i]
         else:
-            newCoefficients = summand.coefficients
+            newCoefficients = list(summand.coefficients)
             for i in range(0, own_grad):
                 newCoefficients[i] += self.coefficients[i]
         return Polynom(newCoefficients)
@@ -46,6 +46,7 @@ def createPolynomFromNull(nullstellen):
         comb = combinations(nullstellen, i)
         for parts in comb:
             coefficients[i] += product(parts)
+        #coefficients[i] *= (-1) ** (grad - 1 - i)
 
     multiplier = 1
     for i in range(0, grad):
@@ -101,6 +102,29 @@ def newton(xValues, yValues):
     return finalPolynom
 
 
+def lagrange(xValues, yValues):
+    starValues = []
+    starPolynoms = []
+    for x in xValues:
+        copy = list(xValues)
+        copy.remove(x)
+        pol = createPolynomFromNull(copy)
+        starPolynoms.append(pol)
+        sol = pol.calculate_at(x)
+        starValues.append(sol)
+
+    polynoms = []
+
+    for i in range(0, len(starValues)):
+        polynoms.append(starPolynoms[i] * (1.0 / float(starValues[i]) * yValues[i]))
+
+    finalPolynom = polynoms[0]
+    for i in range(1, len(polynoms)):
+        finalPolynom += polynoms[i]
+
+    return finalPolynom
+
+
 def product(collection):
     product = 1
     for element in collection:
@@ -108,8 +132,14 @@ def product(collection):
     return product
 
 if __name__ == "__main__":
-    pol = newton([1, 3, 5], [3, 7, 14])
-    print(pol)
+    #pol = newton([1, 3, 5], [3, 7, 14])
+    #print(pol)
 
-    pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
-    print(pol2)
+    #pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
+    #print(pol2)
+
+    lagrange_pol = lagrange([1, 3, 5], [3, 7, 14])
+    print("\nMAIN")
+    print(lagrange_pol)
+    print(lagrange_pol.coefficients)
+

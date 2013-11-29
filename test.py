@@ -60,11 +60,17 @@ class TestAddingTwoPolynoms(unittest.TestCase):
         self.polynom2 = Polynom([2])     # 2
         self.polynom3 = Polynom([-2, 0, 1])  # x² - 2
         self.polynom4 = Polynom([-6, 11, -6, 1])
+        self.polynom5 = Polynom([0.5, 0.2])
+        self.polynom6 = Polynom([0.1, 0.3])
 
     def test_adding(self):
         summedPolynom = self.polynom1 + self.polynom2
         referncePolynom = Polynom([2, 1])
         self.assertEqual(summedPolynom.__repr__(), referncePolynom.__repr__())
+
+        summedPolynom2 = self.polynom5 + self.polynom6 + self.polynom6
+        referncePolynom2 = Polynom([0.7, 0.8])
+        self.assertEqual(summedPolynom2.__repr__(), referncePolynom2.__repr__())
 
 
 class TestMultiplyingPolynomsWithNumber(unittest.TestCase):
