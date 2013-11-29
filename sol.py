@@ -81,7 +81,6 @@ def newton(xValues, yValues):
     finalPolynomCoefficients = []  # c0, c1, c2 etc
     for l in allValues[1:]:
         finalPolynomCoefficients.append(l[0])
-    print finalPolynomCoefficients
 
     polynoms = []  # n0, n1, n2 etc
     polynoms.append(Polynom([1]))   # n0 is allways 1
