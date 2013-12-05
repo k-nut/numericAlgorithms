@@ -43,7 +43,7 @@ def createPolynomFromNull(nullstellen):
     grad = len(nullstellen) + 1
     coefficients = [0 for pos in range(0, len(nullstellen) + 1)]
     for i in range(0, grad):
-        comb = combinations(nullstellen, i)
+        comb = combinate(nullstellen, i)
         for parts in comb:
             coefficients[i] += product(parts)
         #coefficients[i] *= (-1) ** (grad - 1 - i)
@@ -137,6 +137,9 @@ def combinate(inputValues, k):
     del returnValues[:]
     del combinationValues[:]
 
+    if k == 0:
+        return inputValues
+
     for i in range(0, k):
         combinationValues.append(0)
 
@@ -179,12 +182,12 @@ if __name__ == "__main__":
     # print("\nMAIN")
     # print(lagrange_pol)
     # print(lagrange_pol.coefficients)
+    # polynom1 = createPolynomFromNull([1, 2, 3])
 
-
-    inputValues = [1, 2, 3, 4]
-    combinate(inputValues, 2)
-
-    inputValues = [1, 2, 3, 4, 6, 9]
+    inputValues = [1]
     combinate(inputValues, 3)
+    #
+    # inputValues = [1, 2, 3, 4, 6, 9]
+    # combinate(inputValues, 3)
 
 
