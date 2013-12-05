@@ -55,8 +55,8 @@ def createPolynomFromNull(nullstellen):
 
     coefficients.reverse()
 
-    for nullstelle in nullstellen:
-        assert Polynom(coefficients).calculate_at(nullstelle) == 0
+    # for nullstelle in nullstellen:
+    #     assert Polynom(coefficients).calculate_at(nullstelle) == 0
 
     return Polynom(coefficients)
 
@@ -138,14 +138,17 @@ def combinate(inputValues, k):
     del combinationValues[:]
 
     if k == 0:
-        return []
+        yield [1]
+        raise StopIteration
 
     for i in range(0, k):
         combinationValues.append(0)
 
     combinations2(inputValues, len(inputValues), k)
 
-    return returnValues
+    for x in returnValues:
+        yield x
+
 
 
 
