@@ -138,7 +138,7 @@ def combinate(inputValues, k):
     del combinationValues[:]
 
     if k == 0:
-        return inputValues
+        return []
 
     for i in range(0, k):
         combinationValues.append(0)
@@ -182,7 +182,7 @@ if __name__ == "__main__":
     # print("\nMAIN")
     # print(lagrange_pol)
     # print(lagrange_pol.coefficients)
-    # polynom1 = createPolynomFromNull([1, 2, 3])
+    polynom1 = createPolynomFromNull([1, 2, 3])
 
     inputValues = [1]
     combinate(inputValues, 3)
