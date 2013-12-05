@@ -61,6 +61,7 @@ def createPolynomFromNull(nullstellen):
     return Polynom(coefficients)
 
 
+
 def newton(xValues, yValues):
     allValues = []
     allValues.append(xValues)
@@ -131,6 +132,39 @@ def product(collection):
         product *= element
     return product
 
+def combinate(inputValues, k):
+
+    for i in range(0, k):
+        combinationValues.append(0)
+
+    combinations2(inputValues, len(inputValues), k)
+
+    return returnValues
+
+
+
+def combinations2(inputValues, n, k):
+    global combinationValues
+
+    if n > k:
+        combinations2(inputValues, n-1, k)
+
+    if n >= k:
+        k -= 1
+        combinationValues[k] = inputValues[n-1]
+        if k > 0:
+            combinations2(inputValues, n-1, k)
+        else:
+            rep = []
+            for value in combinationValues:
+                rep.append(value)
+
+            returnValues.append(rep)
+
+
+combinationValues = []
+returnValues = []
+
 if __name__ == "__main__":
     #pol = newton([1, 3, 5], [3, 7, 14])
     #print(pol)
@@ -138,8 +172,13 @@ if __name__ == "__main__":
     #pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
     #print(pol2)
 
-    lagrange_pol = lagrange([1, 3, 5], [3, 7, 14])
-    print("\nMAIN")
-    print(lagrange_pol)
-    print(lagrange_pol.coefficients)
+    # lagrange_pol = lagrange([1, 3, 5], [3, 7, 14])
+    # print("\nMAIN")
+    # print(lagrange_pol)
+    # print(lagrange_pol.coefficients)
+
+
+    inputValues = [1, 2, 3, 4]
+    combinate(inputValues, 2)
+
 
