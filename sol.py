@@ -134,6 +134,9 @@ def product(collection):
 
 def combinate(inputValues, k):
 
+    del returnValues[:]
+    del combinationValues[:]
+
     for i in range(0, k):
         combinationValues.append(0)
 
@@ -180,5 +183,8 @@ if __name__ == "__main__":
 
     inputValues = [1, 2, 3, 4]
     combinate(inputValues, 2)
+
+    inputValues = [1, 2, 3, 4, 6, 9]
+    combinate(inputValues, 3)
 
 
