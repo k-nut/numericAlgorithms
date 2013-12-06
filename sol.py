@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from itertools import combinations
-
 
 class Polynom:
 
@@ -55,11 +53,10 @@ def createPolynomFromNull(nullstellen):
 
     coefficients.reverse()
 
-    # for nullstelle in nullstellen:
-    #     assert Polynom(coefficients).calculate_at(nullstelle) == 0
+    for nullstelle in nullstellen:
+        assert Polynom(coefficients).calculate_at(nullstelle) == 0
 
     return Polynom(coefficients)
-
 
 
 def newton(xValues, yValues):
@@ -132,6 +129,7 @@ def product(collection):
         product *= element
     return product
 
+
 def combinate(inputValues, k):
 
     del returnValues[:]
@@ -150,19 +148,17 @@ def combinate(inputValues, k):
         yield x
 
 
-
-
 def combinations2(inputValues, n, k):
     global combinationValues
 
     if n > k:
-        combinations2(inputValues, n-1, k)
+        combinations2(inputValues, n - 1, k)
 
     if n >= k:
         k -= 1
-        combinationValues[k] = inputValues[n-1]
+        combinationValues[k] = inputValues[n - 1]
         if k > 0:
-            combinations2(inputValues, n-1, k)
+            combinations2(inputValues, n - 1, k)
         else:
             rep = []
             for value in combinationValues:
@@ -192,5 +188,3 @@ if __name__ == "__main__":
     #
     # inputValues = [1, 2, 3, 4, 6, 9]
     # combinate(inputValues, 3)
-
-

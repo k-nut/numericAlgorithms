@@ -4,7 +4,7 @@
 
 import unittest
 import random
-from sol import Polynom, createPolynomFromNull, newton, combine
+from sol import Polynom, createPolynomFromNull, newton, combinate
 
 
 class TestPolynomFunction(unittest.TestCase):
@@ -104,10 +104,41 @@ class TestNewton(unittest.TestCase):
 class TestCombinations(unittest.TestCase):
     def test_for_four(self):
         testInput = ['a', 'b', 'c', 'd']
-        self.assertEqual(combine(testInput, 1), testInput)
-        self.assertEqual(combine(testInput, 2), ['ab', 'ac', 'ad', 'bc', 'bd', 'cd'])
-        self.assertEqual(combine(testInput, 3), ['abc', 'abd', 'abd', 'bcd'])
-        self.assertEqual(combine(testInput, 4), ['abcd'])
+
+        comb1 = []
+        for x in combinate(testInput, 1):
+            comb1.append(x)
+
+        self.assertEqual(comb1, [list(value) for value in testInput])
+
+        comb2 = []
+        for x in combinate(testInput, 2):
+            comb2.append(x)
+
+        self.assertEqual(comb2.sort(), [
+            ['a', 'b'],
+            ['a', 'c'],
+            ['a', 'd'],
+            ['b', 'c'],
+            ['b', 'd'],
+            ['c', 'd']
+        ].sort()
+        )
+
+        comb3 = []
+        for x in combinate(testInput, 3):
+            comb3.append(x)
+
+        self.assertEqual(comb3, [list('abc'),
+                                 list('abd'),
+                                 list('acd'),
+                                 list('bcd')])
+
+        comb4 = []
+        for x in combinate(testInput, 4):
+            comb4.append(x)
+
+        self.assertEqual(comb4, [list('abcd')])
 
 
 if __name__ == "__main__":
