@@ -4,7 +4,7 @@
 
 import unittest
 import random
-from sol import Polynom, createPolynomFromNull, newton
+from sol import Polynom, createPolynomFromNull, newton, combine
 
 
 class TestPolynomFunction(unittest.TestCase):
@@ -99,6 +99,15 @@ class TestNewton(unittest.TestCase):
     def setUp(self):
         self.polynom1 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
         #This is already checked by the assertion in the function
+
+
+class TestCombinations(unittest.TestCase):
+    def test_for_four(self):
+        testInput = ['a', 'b', 'c', 'd']
+        self.assertEqual(combine(testInput, 1), testInput)
+        self.assertEqual(combine(testInput, 2), ['ab', 'ac', 'ad', 'bc', 'bd', 'cd'])
+        self.assertEqual(combine(testInput, 3), ['abc', 'abd', 'abd', 'bcd'])
+        self.assertEqual(combine(testInput, 4), ['abcd'])
 
 
 if __name__ == "__main__":
