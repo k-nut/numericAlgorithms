@@ -61,22 +61,21 @@ def createPolynomFromNull(nullstellen):
 
 def newton(xValues, yValues):
     allValues = []
-    allValues.append(xValues)
     allValues.append(yValues)
 
     while len(allValues[-1]) > 1:
-        flastValues = allValues[-1]
+        lastValues = allValues[-1]
 
-        newValues = [0 for x in range(0, len(flastValues) -1)]
-        c = len(newValues) - 1
-        s = len(xValues) -1
-        for x in range(len(flastValues) - 1, 0, -1):
-            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (xValues[s] - xValues[c])
-            c -= 1
-            s -= 1
+        newValues = [0 for x in range(len(lastValues) -1)]
+        top = len(newValues) - 1
+        bottom = len(xValues) -1
+        for x in range(len(lastValues) - 1, 0, -1):
+            newValues[x - 1] = float((lastValues[x] - lastValues[x - 1])) / (xValues[bottom] - xValues[top])
+            top -= 1
+            bottom -= 1
         allValues.append(newValues)
 
-    finalPolynomCoefficients = [value[0] for value in allValues[1:]]  # c0, c1, c2 etc
+    finalPolynomCoefficients = [value[0] for value in allValues]  # c0, c1, c2 etc
 
     polynoms = []  # n0, n1, n2 etc
     polynoms.append(Polynom([1]))   # n0 is allways 1
@@ -157,9 +156,7 @@ def combinations2(inputValues, n, k):
         if k > 0:
             combinations2(inputValues, n - 1, k)
         else:
-            rep = []
-            for value in combinationValues:
-                rep.append(value)
+            rep = [value for value in combinationValues]
 
             returnValues.append(rep)
 
@@ -168,16 +165,14 @@ combinationValues = []
 returnValues = []
 
 if __name__ == "__main__":
-    #pol = newton([1, 3, 5], [3, 7, 14])
-    #print(pol)
+    pol = newton([1, 3, 5], [3, 7, 14])
+    print(pol)
 
-    #pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
-    #print(pol2)
+    pol2 = newton([-2, -1, 0, 1, 2, 3], [-16, 0, 4, 8, 0, 64])
+    print(pol2)
 
-    # lagrange_pol = lagrange([1, 3, 5], [3, 7, 14])
-    # print("\nMAIN")
-    # print(lagrange_pol)
-    # print(lagrange_pol.coefficients)
+    lagrange_pol = lagrange([1, 3, 5], [3, 7, 14])
+    print(lagrange_pol)
     polynom1 = createPolynomFromNull([1, 2, 3])
 
     inputValues = [1]
