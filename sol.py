@@ -63,16 +63,15 @@ def newton(xValues, yValues):
     allValues = []
     allValues.append(xValues)
     allValues.append(yValues)
-    firstValues = allValues[0]
 
     while len(allValues[-1]) > 1:
         flastValues = allValues[-1]
 
         newValues = [0 for x in range(0, len(flastValues) -1)]
         c = len(newValues) - 1
-        s = len(firstValues) -1
+        s = len(xValues) -1
         for x in range(len(flastValues) - 1, 0, -1):
-            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (firstValues[s] - firstValues[c])
+            newValues[x - 1] = float((flastValues[x] - flastValues[x - 1])) / (xValues[s] - xValues[c])
             c -= 1
             s -= 1
         allValues.append(newValues)
