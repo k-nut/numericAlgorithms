@@ -76,9 +76,7 @@ def newton(xValues, yValues):
             s -= 1
         allValues.append(newValues)
 
-    finalPolynomCoefficients = []  # c0, c1, c2 etc
-    for l in allValues[1:]:
-        finalPolynomCoefficients.append(l[0])
+    finalPolynomCoefficients = [value[0] for value in allValues[1:]]  # c0, c1, c2 etc
 
     polynoms = []  # n0, n1, n2 etc
     polynoms.append(Polynom([1]))   # n0 is allways 1
