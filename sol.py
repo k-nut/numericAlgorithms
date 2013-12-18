@@ -44,12 +44,7 @@ def createPolynomFromNull(nullstellen):
         comb = combinate(nullstellen, i)
         for parts in comb:
             coefficients[i] += product(parts)
-        #coefficients[i] *= (-1) ** (grad - 1 - i)
-
-    multiplier = 1
-    for i in range(0, grad):
-        coefficients[i] *= multiplier
-        multiplier *= -1
+        coefficients[i] *= (-1) ** (i)
 
     coefficients.reverse()
 
