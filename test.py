@@ -101,6 +101,11 @@ class TestNewton(unittest.TestCase):
         #This is already checked by the assertion in the function
 
 
+class TestNewtonThrowsErrorWhenInputIsFaulty(unittest.TestCase):
+    def test_double_x(self):
+        self.assertRaises(ValueError, newton, [0, 0, 1], [1, 2, 3])
+
+
 class TestCombinations(unittest.TestCase):
     def test_for_four(self):
         testInput = ['a', 'b', 'c', 'd']

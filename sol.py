@@ -54,9 +54,16 @@ def createPolynomFromNull(nullstellen):
     return Polynom(coefficients)
 
 
+def listContainsAnyElementMoreThanOnce(testlist):
+    return len(set(testlist)) != len(testlist)
+
+
 def newton(xValues, yValues):
     allValues = []
     allValues.append(yValues)
+
+    if listContainsAnyElementMoreThanOnce(xValues):
+        raise ValueError
 
     while len(allValues[-1]) > 1:
         lastValues = allValues[-1]
@@ -172,6 +179,8 @@ if __name__ == "__main__":
 
     inputValues = [1]
     combinate(inputValues, 3)
+
+    print(newton([0, 0, 2], [1, 2, 3]))
     #
     # inputValues = [1, 2, 3, 4, 6, 9]
     # combinate(inputValues, 3)
