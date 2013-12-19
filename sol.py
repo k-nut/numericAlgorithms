@@ -99,6 +99,10 @@ def newton(xValues, yValues):
 
 
 def lagrange(xValues, yValues):
+
+    if listContainsAnyElementMoreThanOnce(xValues):
+        raise ValueError
+
     starValues = []
     starPolynoms = []
     for x in xValues:

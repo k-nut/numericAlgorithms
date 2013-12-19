@@ -4,7 +4,7 @@
 
 import unittest
 import random
-from sol import Polynom, createPolynomFromNull, newton, combinate
+from sol import Polynom, createPolynomFromNull, newton, combinate, lagrange
 
 
 class TestPolynomFunction(unittest.TestCase):
@@ -104,6 +104,11 @@ class TestNewton(unittest.TestCase):
 class TestNewtonThrowsErrorWhenInputIsFaulty(unittest.TestCase):
     def test_double_x(self):
         self.assertRaises(ValueError, newton, [0, 0, 1], [1, 2, 3])
+
+
+class TestLagrangeThrowsErrorWhenInputIsFaulty(unittest.TestCase):
+    def test_double_x(self):
+        self.assertRaises(ValueError, lagrange, [0, 0, 1], [1, 2, 3])
 
 
 class TestCombinations(unittest.TestCase):
