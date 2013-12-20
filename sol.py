@@ -16,12 +16,14 @@ class Polynom:
     def calculate_at(self, position):
         sol = 0
         for index, coefficient in enumerate(self.coefficients):
-            sol += coefficient * position ** index
+            sol += coefficient * (position ** index)
         return sol
 
     def __add__(self, summand):
         own_grad = len(self.coefficients)
         summand_grad = len(summand.coefficients)
+        highest_degree = max(own_grad, summand_grad)
+        createListFilledWithZerosOfLength(highest_degree)
         if own_grad > summand_grad:
             newCoefficients = list(self.coefficients)
             for i in range(0, summand_grad):
@@ -33,13 +35,14 @@ class Polynom:
         return Polynom(newCoefficients)
 
     def __mul__(self, number):
-        coefficients = [number * float(coefficient) for coefficient in self.coefficients]
+        coefficients = [coefficient * number for coefficient in self.coefficients]
         return Polynom(coefficients)
+
 
 
 def createPolynomFromNull(nullstellen):
     grad = len(nullstellen) + 1
-    coefficients = [0 for pos in range(0, len(nullstellen) + 1)]
+    coefficients = createListFilledWithZerosOfLength(len(nullstellen) + 1)
     for i in range(0, grad):
         comb = combinate(nullstellen, i)
         for parts in comb:
@@ -58,6 +61,10 @@ def listContainsAnyElementMoreThanOnce(testlist):
     return len(set(testlist)) != len(testlist)
 
 
+def createListFilledWithZerosOfLength(n):
+    return [0 for x in range(n)]
+
+
 def newton(xValues, yValues):
     allValues = []
     allValues.append(yValues)
@@ -68,7 +75,7 @@ def newton(xValues, yValues):
     while len(allValues[-1]) > 1:
         lastValues = allValues[-1]
 
-        newValues = [0 for x in range(len(lastValues) -1)]
+        newValues = createListFilledWithZerosOfLength(len(lastValues) -1)
         top = len(newValues) - 1
         bottom = len(xValues) -1
         for x in range(len(lastValues) - 1, 0, -1):
@@ -184,7 +191,5 @@ if __name__ == "__main__":
     inputValues = [1]
     combinate(inputValues, 3)
 
-    print(newton([0, 0, 2], [1, 2, 3]))
-    #
     # inputValues = [1, 2, 3, 4, 6, 9]
     # combinate(inputValues, 3)
