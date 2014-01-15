@@ -3,3 +3,4 @@ python:
         - "3.3"
 script:
         - "cd .. && python -m numericAlgorithms.tests.interpolationTests"
+        - "cd .. && python -m numericAlgorithms.tests.matrixTests"
