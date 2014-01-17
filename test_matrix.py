@@ -2,7 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from matrix import Matrix
+from matrix import Matrix, addedProduct
+
+
+class TestAddedProduct(unittest.TestCase):
+    def testBasicAddedProduct(self):
+        list1 = [1, 2, 3]
+        list2 = [2, 4, 6]
+        self.assertEqual(28, addedProduct(list1, list2))
 
 
 class TestBaiscMatrix(unittest.TestCase):
@@ -46,6 +53,35 @@ class TestSettingValues(unittest.TestCase):
         matrix.setRow(2, [2, 5])
         self.assertEqual(matrix.getRow(1), [0, 0])
         self.assertEqual(matrix.getRow(2), [2, 5])
+
+
+class TestMultiplyingMatrixes(unittest.TestCase):
+    def test_multiplying_empty_matrixes(self):
+        matrix1 = Matrix(2, 3)
+        matrix1.setRow(1, [3, 2, 1])
+        matrix1.setRow(2, [1, 0, 2])
+
+        matrix2 = Matrix(3, 2)
+        matrix2.setColumn(1, [1, 0, 4])
+        matrix2.setColumn(2, [2, 1, 0])
+
+        matrixWithWrongDimension = Matrix(5, 6)
+
+        with self.assertRaises(TypeError):
+            matrix2 * matrixWithWrongDimension
+
+        print("Matrix 1")
+        print(matrix1)
+        print("Matrix 2")
+        print(matrix2)
+        correctMultipliedMatrix = Matrix(2, 2)
+        correctMultipliedMatrix.setRow(1, [7, 8])
+        correctMultipliedMatrix.setRow(2, [9, 2])
+        multipliedMatrix = matrix1 * matrix2
+        self.assertEqual(multipliedMatrix.matrix,
+                correctMultipliedMatrix.matrix)
+
+
 
 if __name__ == "__main__":
     unittest.main()
