@@ -4,7 +4,7 @@
 
 import unittest
 import random
-from ..interpolation import  Polynom, createPolynomFromNull, newton, combinate, lagrange
+from interpolation import Polynom, createPolynomFromNull, newton, combinate, lagrange
 
 
 class TestPolynomFunction(unittest.TestCase):
