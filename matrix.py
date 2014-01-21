@@ -15,8 +15,6 @@ class Matrix():
         if (self.columnCount != multipliedMatrix.rowCount):
             raise TypeError("Number of row and column have to match")
         newMatrix = Matrix(self.rowCount, multipliedMatrix.columnCount)
-        print("New matrix")
-        print(newMatrix)
         for columnNumber in range(1, newMatrix.columnCount + 1):
             for rowNumber in range(1, newMatrix.rowCount + 1):
                 row = self.getRow(rowNumber)
@@ -25,8 +23,6 @@ class Matrix():
                                    columnNumber,
                                    addedProduct(row, column)
                                    )
-        print("afterward")
-        print(newMatrix)
         return newMatrix
 
     def setUpMatrix(self):

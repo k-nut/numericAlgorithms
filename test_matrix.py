@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import random
 from matrix import Matrix, addedProduct
 
 
@@ -56,7 +57,7 @@ class TestSettingValues(unittest.TestCase):
 
 
 class TestMultiplyingMatrixes(unittest.TestCase):
-    def test_multiplying_empty_matrixes(self):
+    def test_multiplying_matrixes(self):
         matrix1 = Matrix(2, 3)
         matrix1.setRow(1, [3, 2, 1])
         matrix1.setRow(2, [1, 0, 2])
@@ -70,17 +71,22 @@ class TestMultiplyingMatrixes(unittest.TestCase):
         with self.assertRaises(TypeError):
             matrix2 * matrixWithWrongDimension
 
-        print("Matrix 1")
-        print(matrix1)
-        print("Matrix 2")
-        print(matrix2)
         correctMultipliedMatrix = Matrix(2, 2)
         correctMultipliedMatrix.setRow(1, [7, 8])
         correctMultipliedMatrix.setRow(2, [9, 2])
         multipliedMatrix = matrix1 * matrix2
         self.assertEqual(multipliedMatrix.matrix,
-                correctMultipliedMatrix.matrix)
+                         correctMultipliedMatrix.matrix)
 
+    def test_multiplying_big_matrixes(self):
+        #this only tests speed and not correctness
+        matrix1 = Matrix(20, 20)
+        matrix2 = Matrix(20, 20)
+        for i in range(matrix1.rowCount + 1):
+            matrix2.setColumn(i, [random.randint(0, 5000) for i in range(20)])
+            matrix1.setColumn(i, [random.randint(0, 5000) for i in range(20)])
+        multiplied = matrix1 * matrix2
+        print(multiplied)
 
 
 if __name__ == "__main__":
