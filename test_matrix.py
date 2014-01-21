@@ -78,6 +78,22 @@ class TestMultiplyingMatrixes(unittest.TestCase):
         self.assertEqual(multipliedMatrix.matrix,
                          correctMultipliedMatrix.matrix)
 
+    def test_multiplying_matrixes_with_floats(self):
+        matrix1 = Matrix(2, 3)
+        matrix1.setRow(1, [3.5, 2, 1])
+        matrix1.setRow(2, [1, 0, 2.5])
+
+        matrix2 = Matrix(3, 2)
+        matrix2.setColumn(1, [0.5, 0, 4])
+        matrix2.setColumn(2, [2, 1.375, 0])
+
+        correctMultipliedMatrix = Matrix(2, 2)
+        correctMultipliedMatrix.setRow(1, [5.75, 9.75])
+        correctMultipliedMatrix.setRow(2, [10.5, 2])
+        multipliedMatrix = matrix1 * matrix2
+        self.assertEqual(multipliedMatrix.matrix,
+                         correctMultipliedMatrix.matrix)
+
     def test_multiplying_big_matrixes(self):
         #this only tests speed and not correctness
         matrix1 = Matrix(20, 20)
@@ -85,9 +101,7 @@ class TestMultiplyingMatrixes(unittest.TestCase):
         for i in range(matrix1.rowCount + 1):
             matrix2.setColumn(i, [random.randint(0, 5000) for i in range(20)])
             matrix1.setColumn(i, [random.randint(0, 5000) for i in range(20)])
-        multiplied = matrix1 * matrix2
-        print(multiplied)
-
+        matrix1 * matrix2
 
 if __name__ == "__main__":
     unittest.main()
