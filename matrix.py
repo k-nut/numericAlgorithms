@@ -63,6 +63,10 @@ class Matrix():
             self.setValue(row, position + 1, value)
 
     def setValue(self, row, column, value):
+        if row > self.rowCount or column > self.columnCount:
+            raise ValueError("Row or column value to high for the matrix")
+        if row < 1 or column < 1:
+            raise ValueError("Row and column must be at least 1")
         self.matrix[row - 1][column - 1] = value
 
 

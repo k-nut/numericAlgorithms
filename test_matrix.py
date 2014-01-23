@@ -55,6 +55,15 @@ class TestSettingValues(unittest.TestCase):
         self.assertEqual(matrix.getRow(1), [0, 0])
         self.assertEqual(matrix.getRow(2), [2, 5])
 
+    def test_error_handling(self):
+        matrix = Matrix(2, 3)
+        self.assertRaises(ValueError, matrix.setValue, 0, 1, 3)
+        self.assertRaises(ValueError, matrix.setValue, 1, 0, 3)
+        self.assertRaises(ValueError, matrix.setValue, 0, 0, 3)
+        self.assertRaises(ValueError, matrix.setValue, 3, 1, 3)
+        self.assertRaises(ValueError, matrix.setValue, 1, 4, 3)
+        self.assertRaises(ValueError, matrix.setValue, 3, 4, 3)
+
 
 class TestMultiplyingMatrixes(unittest.TestCase):
     def test_multiplying_matrixes(self):
@@ -98,10 +107,11 @@ class TestMultiplyingMatrixes(unittest.TestCase):
         #this only tests speed and not correctness
         matrix1 = Matrix(20, 20)
         matrix2 = Matrix(20, 20)
-        for i in range(matrix1.rowCount + 1):
+        for i in range(1, matrix1.rowCount + 1):
             matrix2.setColumn(i, [random.randint(0, 5000) for i in range(20)])
             matrix1.setColumn(i, [random.randint(0, 5000) for i in range(20)])
         matrix1 * matrix2
+
 
 if __name__ == "__main__":
     unittest.main()
