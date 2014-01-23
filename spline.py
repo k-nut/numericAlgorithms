@@ -31,4 +31,38 @@ class Spline():
                                 )
 
     def calculate_ds(self):
-        pass
+        xValues = self.xValues
+        yValues = self.yValues
+
+        self.ds = []
+        self.ds.append(self.calculate_d0())
+
+        for i in range(1, self.length -1):
+            firstFraction = 6 / (xValues[i + 1] - xValues[i - 1])
+
+            secondFraction = ((yValues[i + 1] - yValues[i]) /
+                              (xValues[i + 1] - xValues[i])
+                              )
+
+            thirdFraction = ((yValues[i] - yValues[i - 1]) /
+                             (xValues[i] - xValues[i - 1])
+                             )
+
+            self.ds.append(firstFraction * (secondFraction - thirdFraction))
+
+        self.ds.append(self.calculate_dn())
+
+    def calculate_d0(self):
+        xValues = self.xValues
+        yValues = self.yValues
+        return 6 / (xValues[1] - xValues[0]) * ((yValues[1] - yValues[0]) /
+                                                (xValues[1] - xValues[0])
+                                                -self.firstDerivate)
+
+    def calculate_dn(self):
+        xValues = self.xValues
+        yValues = self.yValues
+        return 6 / (xValues[-1] - xValues[-2]) * (self.lastDerivate -
+                                                  (yValues[-1] - yValues[-2]) /
+                                                  (xValues[-1] - xValues[-2])
+                                                  )
