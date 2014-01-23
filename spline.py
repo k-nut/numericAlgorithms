@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from matrix import Matrix
 
 class Spline():
     def __init__(self, xValues, yValues, firstDerivate, lastDerivate):
@@ -14,6 +15,8 @@ class Spline():
 
         self.calculate_lambdas_and_mys()
         self.calculate_ds()
+
+        self.create_matrix()
 
     def calculate_lambdas_and_mys(self):
         self.calculate_lambdas()
@@ -66,3 +69,14 @@ class Spline():
                                                   (yValues[-1] - yValues[-2]) /
                                                   (xValues[-1] - xValues[-2])
                                                   )
+
+    def create_matrix(self):
+        self.matrix = Matrix(self.length, self.length)
+        print(len(self.lambdas))
+        for i in range(1, self.matrix.rowCount + 1):
+            self.matrix.setValue(i, i, 2)
+        for i in range(1, self.matrix.rowCount):
+            self.matrix.setValue(i, i + 1, self.lambdas[i - 1])
+        for i in range(2, self.matrix.rowCount + 1):
+            self.matrix.setValue(i, i - 1, self.mys[i -2])
+            pass

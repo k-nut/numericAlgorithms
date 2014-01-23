@@ -14,6 +14,7 @@ class TestBasicSpline(unittest.TestCase):
         spline = Spline(x, y, firstderivate, lastderivate)
         self.assertEqual(spline.lambdas, [1, 0.5, 0.5, 0.5, 0.5, 0.5])
         self.assertEqual(spline.mys, [0, 0.5, 0.5, 0.5, 0.5, 1])
+        print(spline.matrix)
 
 
 if __name__ == "__main__":
