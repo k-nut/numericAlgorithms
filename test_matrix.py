@@ -12,6 +12,18 @@ class TestAddedProduct(unittest.TestCase):
         list2 = [2, 4, 6]
         self.assertEqual(28, addedProduct(list1, list2))
 
+class TestDecomposition(unittest.TestCase):
+    def testLowerDecomposition(self):
+        columns = 3
+        rows = 3
+        matrix = Matrix(rows, columns)
+        matrix.setRow(1, [1, 2, 3])
+        matrix.setRow(2, [4, 5, 6])
+        matrix.setRow(3, [7, 8, 9])
+        lu_matrix_list = matrix.get_lu_decomposition()
+        new_matrix = lu_matrix_list[0] * lu_matrix_list[1]
+        self.assertEqual(matrix.matrix, new_matrix.matrix)
+
 
 class TestBaiscMatrix(unittest.TestCase):
     def test_representation(self):
