@@ -70,6 +70,27 @@ class Matrix():
         self.matrix[row - 1][column - 1] = value
 
 
+    def get_lu_decomposition(self):
+        upper_matrix = Matrix(self.rowCount, self.columnCount)
+        for row in range(1, self.rowCount+1):
+            upper_matrix.setValue(row, row, 1)
+
+        lower_matrix = Matrix(self.rowCount, self.columnCount)
+        for row in range(1, self.rowCount+1):
+            lower_matrix.setRow(row, self.getRow(row))
+
+        for column in range(1, self.columnCount):
+            for row in range(column + 1, self.rowCount+1):
+                multiplier = lower_matrix.getRow(row)[column-1] / lower_matrix.getRow(column)[column-1]
+                upper_matrix.setValue(row, column, multiplier)
+                for i in range(1, self.columnCount + 1):
+                    lower_matrix.setValue(row, i, lower_matrix.getValue(row, i) - multiplier * lower_matrix.getValue(column, i))
+
+        return_values = []
+        return_values.append(upper_matrix)
+        return_values.append(lower_matrix)
+        return return_values;
+
 def addedProduct(enumerable1, enumerable2):
     assert len(enumerable1) == len(enumerable2)
     product = 0

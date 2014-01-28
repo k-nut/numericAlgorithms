@@ -23,6 +23,7 @@ class Spline():
         self.calculate_new_lambdas()
         self.calculate_new_ds()
         self.calculate_Mis()
+        self.calculate_coefficients()
 
     def calculate_lambdas_and_mys(self):
         self.calculate_lambdas()
@@ -113,4 +114,16 @@ class Spline():
             self.Mis[i] = (self.new_ds[i]
                            - self.new_lambdas[i] * self.Mis[i + 1]
                            )
-        self.Mis.reverse()
+
+
+    def calculate_coefficients(self):
+        self.coefficients = []
+
+        for i in range(0, self.length - 1):
+            self.coefficients.append([])
+            self.coefficients[i].append(self.yValues[i])
+            self.coefficients[i].append(-self.Mis[i] * ((self.xValues[i+1] - self.xValues[i])/2) + ((self.yValues[i+1] - self.yValues[i])/(self.xValues[i+1] - self.xValues[i])) - ((self.Mis[i+1] - self.Mis[i]) / 6) * (self.xValues[i+1] - self.xValues[i]))
+            self.coefficients[i].append(self.Mis[i]/2)
+            self.coefficients[i].append((self.Mis[i+1]-self.Mis[i])/(6*(self.xValues[i+1] - self.xValues[i])))
+
+
