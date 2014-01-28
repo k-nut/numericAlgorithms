@@ -4,8 +4,7 @@ python:
 install:
         - pip install coveralls
 script:
-        - coverage run
-        - "python -m unittest discover"
+        - coverage run run_tests.py
 after_success:
         coveralls
 
