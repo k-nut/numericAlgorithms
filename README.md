@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/k-nut/numericAlgorithms.png?branch=master)](https://travis-ci.org/k-nut/numericAlgorithms)
+[![Coverage Status](https://coveralls.io/repos/k-nut/numericAlgorithms/badge.png)](https://coveralls.io/r/k-nut/numericAlgorithms)
 
 numericAlgorighms
 =================
