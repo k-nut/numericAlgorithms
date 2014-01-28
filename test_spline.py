@@ -18,7 +18,8 @@ class TestBasicSpline(unittest.TestCase):
         self.assertEqual(spline.new_lambdas, [0.5, 2.0 / 7, 7.0 / 26])
         #self.assertEqual(spline.new_ds, [-9, 90 / 7.0, -18.0, 1])  # die 1 ist
         #falsch und muss ersetzt werden
-        expectedMis = [104 / 3.0, -82 / 3.0, 62 /3.0, -58 / 3.0]
+        # expectedMis = [104 / 3.0, -82 / 3.0, 62 /3.0, -58 / 3.0]
+        expectedMis = [-58 / 3.0, 62 / 3, -82 / 3.0, 104 / 3.0]
         for i in range(len(expectedMis)):
             self.assertAlmostEqual(expectedMis[i], spline.Mis[i])
 
