@@ -1,5 +1,11 @@
 language: python
 python:
         - "3.3"
+install:
+        - pip install coveralls
 script:
+        - coverage run
         - "python -m unittest discover"
+after_success:
+        coveralls
+
